@@ -1,0 +1,53 @@
+
+.header {
+    height: 200px;
+    background-color: #CAFDE0;
+}
+
+
+/* common 공통 */
+button {
+    width: 200px;
+    height: 50px;
+    border: 1;
+}
+
+button {
+    margin-right: 10px;
+    cursor: pointer;
+    border: 2px solid beige ;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 600;
+    width: 150px;
+    height: 50px;
+    background-color:  #f0f6f7;
+    border-radius: 10px;
+}
+
+button:hover {
+    background-color:rgb(243, 220, 142);
+}
+
+.navbar {
+    width: 1200px;
+    margin: auto;
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.logo { 
+    font-size: 52px;
+    font-weight: 700;
+}
+
+.nav_btn {
+    position: absolute;
+    right: 50px;
+    top: 50%;
+    margin-top: 20px;
+    transform: translate(-50%,-50%);
+}

@@ -1,0 +1,125 @@
+
+/* common 공통*/
+/* 버튼스타일 다른 페이지에서 영향받는중! */
+input {
+    width: 250px;
+    height: 40px;
+    margin: 30px 0 10px 0 ;
+    border: none;
+}
+
+textarea {
+    resize: none;
+    height: 250px;
+    font-size: 22px;
+    border: none;
+}
+
+.detail_inner {
+    text-align: center;
+    width: 1200px;
+    margin: auto;
+}
+
+.detail_title {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+/* codi */
+.codi_outter {
+    margin: 50px auto;
+    width: 900px;
+    height: 700px;
+    border: 2px solid #95b2f2;
+    border-radius: 10px;
+}
+
+.codi_outter > .codi_inner {
+    margin: 50px auto;
+    width: 800px;
+    height: 500px;
+    border: 2px solid #75bceb;
+    border-radius: 10px;
+}
+
+
+.codi_outter > .codi_inner > .codi_inform  {
+    display: flex;  
+}
+
+.codi_outter > .codi_inner > .codi_inform > .codi_img {
+    margin: 30px 0 20px 20px;
+    width: 380px;
+    height: 400px;
+    background-color: blanchedalmond;
+}
+
+.codi_outter > .codi_inner > .codi_inform > .codi_input {
+    width: 400px;
+    height: 500px;
+}
+
+/* codi textArea 부분 */
+.codi_outter > .codi_inner .codi_content {
+    margin: 10px 0 0 17px;
+}
+
+/* codi 수정 삭제 좋아요 버튼 */
+.codi_btn {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+/* comment */
+
+.comment_box{
+    width: 900px;
+    height: 220px;
+    margin: auto;
+}
+
+/* 댓글내용 textArea */
+.comment_text {
+    width: 900px;
+    height: 120px;
+    border: 2px solid #75bceb;;
+    border-radius: 5px;
+    font-size: 16px;
+    margin: auto;
+}
+
+/* 작성된 댓글 */
+.comment_list {
+    width: 900px;
+    margin: 100px auto ;
+}
+
+.comment_li {
+    text-align: left;
+    padding: 10px 0 0 30px;
+    list-style: none;
+    width: inherit;
+    box-sizing: border-box;
+    border: 1px solid #75bceb;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    height: 100px;
+}
+
+.comment_list button {
+    border: 1px solid white;
+    background-color: white;
+    width: 100px;
+    font-size: 16px;
+    float: right;
+    padding-bottom: 30px;
+    font-weight: 500;
+}
+
+.comment_list button:hover {
+    background-color: white;
+    color: rgb(245, 176, 49);;
+}

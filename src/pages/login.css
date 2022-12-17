@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* common공통 */
+#login_id {
+    margin-left: 13px;
+}
+
+#password_check {
+    margin-right: 50px;
+}
+
+#nickname {
+    margin-right: 22px ;
+}
+
+input:focus {
+    outline: none !important;
+    border-color: #c2d1f3;
+    box-shadow: 0 0 6px #c2d1f3;;
+}
+
+.bg {
+    width: 100%;
+    height: 100vh;
+    background: #f4f6f9;
+    position: absolute;
+    z-index: -9999;
+    background-color: #CAFDE0;
+}
+
+.inner {
+    display: flex;
+    width: 1200px;
+    height: 600px;
+}
+
+.login_image {
+    width: 900px;
+    margin-top: 100px;
+}
+
+.form-wrapper {
+    position: relative;
+}
+
+.signup_form,
+.login_form {
+    background-color: #faf7e2;
+    position: absolute;
+    border: 2px solid rgb(252, 226, 179);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.login_form {
+    top: 50%;
+    left: 70%;
+    transform: translate(-10%,-50%);
+    margin-top: 50px;
+    width: 350px;
+    height: 400px;
+}
+
+.login_title {
+    margin: 40px;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.login_input {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.login_input input {
+    font-size: 18px;
+    font-weight: 400;
+    width: 200px;
+    height: 30px;
+    margin: 20px;
+}
+
+
+.login_btn {
+    margin-top: 40px;
+}
+.login_btn button {
+    margin-right: 10px;
+    cursor: pointer;
+    border: 2px solid beige ;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 600;
+    width: 150px;
+    height: 50px;
+    background-color:  #f0f6f7;
+    border-radius: 10px;
+}
+
+.login_btn button:hover {
+    background-color:rgb(243, 220, 142);
+}
+
+.login_btn button:last-child {
+    margin-right: 0;
+}
+
+/* signup */
+
+.signup-wrapper {
+    margin-left: 300px;
+}
+
+.signup_form {
+    top: 50%;
+    left: 70%;
+    transform: translate(-40%,-50%);
+    width: 400px;
+    height: 550px;
+}
+
