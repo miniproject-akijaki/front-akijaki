@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { __postPosts } from "../thunk/thunk";
+import { __postPosts, __userLogin } from "../thunk/thunk";
 
 let initialState = {
+  signup: [],
   post: [],
   isLoading: false,
   error: null,
@@ -11,19 +12,26 @@ let initialState = {
 const postSlice = createSlice({
   name: "post",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    changeInputField: (state, { payload: { id, value } }) => {
+      return {
+        ...state,
+        [id]: value,
+      };
+    },
+  },
   extraReducers: (builder) => {
-    //     builder.addCase(__getPosts.pending, (state, action) => {
-    //       state.isLoading = true;
-    //     });
-    //     builder.addCase(__getPosts.fulfilled, (state, action) => {
-    //       state.post = action.payload;
-    //       state.isLoading = false;
-    //     });
-    //     builder.addCase(__getPosts.rejected, (state, action) => {
-    //       state.isLoading = false;
-    //       state.error = action.payload;
-    //     });
+    builder.addCase(__userLogin.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(__userLogin.fulfilled, (state, action) => {
+      state.post = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(__userLogin.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    });
     builder.addCase(__postPosts.fulfilled, (state, action) => {
       state.post.push(action.payload);
     });
@@ -42,7 +50,7 @@ const postSlice = createSlice({
   },
 });
 
-export const {} = postSlice.actions;
+export const { changeInputField } = postSlice.actions;
 
 const postReducer = postSlice.reducer;
 

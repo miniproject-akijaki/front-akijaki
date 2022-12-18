@@ -1,18 +1,22 @@
 
 /* common 공통*/
 /* 버튼스타일 다른 페이지에서 영향받는중! */
-input {
-    width: 250px;
-    height: 40px;
-    margin: 30px 0 10px 0 ;
-    border: none;
-}
-
 textarea {
-    resize: none;
+    resize: none !important;
     height: 250px;
     font-size: 22px;
     border: none;
+}
+
+textarea:hover {
+    outline: none;
+    border-color: #c2d1f3;
+    box-shadow: 0 0 6px #c2d1f3;;
+}
+
+.codi_content label,
+.codi_input label {
+    font-size: 28px;
 }
 
 .detail_inner {
@@ -28,41 +32,57 @@ textarea {
 
 /* codi */
 .codi_outter {
-    margin: 50px auto;
-    width: 900px;
+    margin: 80px auto 100px auto;
+    width: 1100px;
     height: 700px;
-    border: 2px solid #95b2f2;
+    border: 3px solid #95b2f2;
     border-radius: 10px;
+    box-shadow: -1px 0 5px 1px rgb(0 0 0 / 20%);
 }
 
 .codi_outter > .codi_inner {
     margin: 50px auto;
-    width: 800px;
-    height: 500px;
-    border: 2px solid #75bceb;
+    width: 1100px;
+    height: 600px;
+    /* border: 2px solid #75bceb; */
     border-radius: 10px;
 }
 
 
-.codi_outter > .codi_inner > .codi_inform  {
+.codi_outter  > .codi_inform  {
+    margin: 40px;
     display: flex;  
 }
 
-.codi_outter > .codi_inner > .codi_inform > .codi_img {
+.codi_outter  > .codi_inform > .codi_img {
     margin: 30px 0 20px 20px;
-    width: 380px;
-    height: 400px;
+    width: 420px;
+    height: 500px;
     background-color: blanchedalmond;
 }
 
-.codi_outter > .codi_inner > .codi_inform > .codi_input {
-    width: 400px;
+.codi_outter  > .codi_inform > .codi_input {
+    width: 600px;
     height: 500px;
+    margin: auto;
+    /* text-align: center; */
+}
+
+.codi_outter  > .codi_inform > .codi_input input {
+    width: 400px;
+    height: 40px;
+    margin: 30px 0 10px 0 ;
+    border: none;
 }
 
 /* codi textArea 부분 */
-.codi_outter > .codi_inner .codi_content {
-    margin: 10px 0 0 17px;
+.codi_outter  .codi_content {
+    margin: 20px 0 0 70px;
+}
+
+.codi_outter  .codi_content textarea {
+    width: 500px;
+    height: 300px;
 }
 
 /* codi 수정 삭제 좋아요 버튼 */
@@ -92,7 +112,7 @@ textarea {
 /* 작성된 댓글 */
 .comment_list {
     width: 900px;
-    margin: 100px auto ;
+    margin: 30px auto ;
 }
 
 .comment_li {

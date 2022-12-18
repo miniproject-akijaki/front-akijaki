@@ -1,6 +1,6 @@
 import "./detail.css";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../components/header/Header";
+import Footer from "../components/footer/Footer";
 
 const Detail = () => {
   return (
@@ -9,21 +9,19 @@ const Detail = () => {
       <div className="detail_inner">
         <p className="detail_title">코디 상세 페이지</p>
         <div className="codi_outter">
-          <div className="codi_inner">
-            <div className="codi_inform">
-              <img className="codi_img"></img>
-              <div className="codi_input">
-                <label>제목 : </label>
-                <input type="text" readOnly />
+          <div className="codi_inform">
+            <img className="codi_img"></img>
+            <div className="codi_input">
+              <label>제목 : </label>
+              <input type="text" readOnly />
+              <br></br>
+              <label>가격 : </label>
+              <input type="text" readOnly />
+              <br></br>
+              <div className="codi_content">
+                <label> 내용</label>
                 <br></br>
-                <labe>가격 : </labe>
-                <input type="text" readOnly />
-                <br></br>
-                <div className="codi_content">
-                  <label>내용</label>
-                  <br></br>
-                  <textarea readOnly></textarea>
-                </div>
+                <textarea readOnly></textarea>
               </div>
             </div>
           </div>

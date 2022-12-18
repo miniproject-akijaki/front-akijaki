@@ -1,8 +1,3 @@
-.write_inner {
-    text-align: center;
-    width: 1200px;
-    margin: auto;
-}
 
 .write_title {
     position: absolute;
@@ -13,39 +8,62 @@
 }
 
 .write_outter {
-    margin: 80px auto;
-    width: 900px;
-    height: 700px;
-    border: 2px solid #95b2f2;
-    border-radius: 10px;
+    width: 1200px;
+    margin: auto;
+}
+
+/* label태그  fontsize */
+.write_content label,
+.write_input label {
+    font-size: 28px;
+}
+
+/* input 타입 파일 넓이 설정 */
+.write_input input[type=file] {
+    width: 330px !important; 
 }
 
 .write_outter > .write_inner {
+    text-align: center;
     position: relative;
-    margin: 50px auto;
-    width: 800px;
-    height: 600px;
-    border: 2px solid #75bceb;
+    margin: 80px auto 100px auto;
+    width: 1100px;
+    height: 700px;
+    border: 3px solid #95b2f2;
     border-radius: 10px;
+    box-shadow: -1px 0 5px 1px rgb(0 0 0 / 20%);
 }
 
 .write_outter > .write_inner > .write_inform  {
     display: flex;  
+    margin: 40px;
 }
 .write_outter > .write_inner >.write_inform > .write_input {
-    width: 400px;
+    width: 600px;
     height: 500px;
+    margin: auto;
+}
+.write_outter > .write_inner >.write_inform > .write_input input {
+    width: 400px;
+    height: 40px;
+    margin: 30px 0 10px 0 ;
+    border: none;
 }
 
 .write_outter > .write_inner > .write_inform > .write_img {
     margin: 30px 0 20px 20px;
-    width: 380px;
-    height: 400px;
+    width: 420px;
+    height: 500px;
     background-color: blanchedalmond;
 }
 
 .write_outter > .write_inner .write_content {
-    margin: 10px 0 0 17px;
+    margin: 20px 0 0 70px;
+}
+
+.write_outter > .write_inner .write_content textarea {
+    width: 500px;
+    height: 200px;
 }
 
 /* 등록, 취소 버튼 */

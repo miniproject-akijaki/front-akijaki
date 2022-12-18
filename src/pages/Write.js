@@ -1,6 +1,6 @@
 import "./write.css";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../components/header/Header";
+import Footer from "../components/footer/Footer";
 
 const Write = () => {
   return (
@@ -16,11 +16,12 @@ const Write = () => {
               <label>제목 : </label>
               <input type="text" />
               <br></br>
-              <labe>가격 : </labe>
+              <label>가격 : </label>
               {/* price 인풋 state만들기/*/}
               <input type="number" />
               <br></br>
               {/* file은 보류 */}
+              <label className="write_file">이미지 파일:</label>
               <input type="file" />
               <br></br>
               <div className="write_content">
@@ -31,7 +32,7 @@ const Write = () => {
               </div>
             </div>
             <div className="write_btn">
-              {/* 이 등록 버튼을 만들깨 onclick dispatch요청 만들기 */}
+              {/* 이 등록 버튼을 만들깨 onclick dispatch */}
               <button className="write_submit" type="submit">
                 등록
               </button>

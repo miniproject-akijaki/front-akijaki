@@ -1,7 +1,8 @@
 import "./main.css";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../components/header/Header";
+import Footer from "../components/footer/Footer";
 import { useState, useLayoutEffect, useRef } from "react";
+
 const Main = () => {
   const slides = [
     "#33a",

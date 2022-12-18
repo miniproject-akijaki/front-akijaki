@@ -1,28 +1,26 @@
-import "./login.css";
 import Lottie from "lottie-react";
 import { loginside_image } from "../assets";
+import LoginForm from "../components/login/LoginForm";
+import "./login.css";
+
 const Login = () => {
   return (
-    <div className="inner">
-      <div className="login_image">
-        <Lottie animationData={loginside_image} />
-      </div>
-      <div className="form-wrapper">
-        <div className="login_form">
-          <p className="login_title">로그인</p>
-          <div className="login_input">
-            <label id="login_id">아이디 : </label>
-            <input type="text" /> <br></br>
-            <label>비밀번호 :</label>
-            <input type="password" />
-          </div>
-          <div className="login_btn">
-            <button>확인</button>
-            <button>취소</button>
-          </div>
+    <div className="outer">
+      <div className="inner">
+        <div className="waviy">
+          <span style={{ animationDelay: "0.1s" }}>A</span>
+          <span style={{ animationDelay: "0.4s" }}>K</span>
+          <span style={{ animationDelay: "0.7s" }}>I</span>
+          <span style={{ animationDelay: "1.1s" }}>J</span>
+          <span style={{ animationDelay: "1.3s" }}>A</span>
+          <span style={{ animationDelay: "1.7s" }}>K</span>
+          <span style={{ animationDelay: "2s" }}>I</span>
         </div>
+        <div className="login_image">
+          <Lottie animationData={loginside_image} />
+        </div>
+        <LoginForm />
       </div>
-      <div className="bg"></div>
     </div>
   );
 };

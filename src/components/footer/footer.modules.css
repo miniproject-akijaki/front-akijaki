@@ -1,0 +1,121 @@
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.footer a:hover,
+.footer li:hover {
+  color: white;
+}
+
+.footer {
+    background-color: #777;
+}
+
+.footer .inner{
+    position: relative;
+    width: 1200px;
+    height: 250px;
+    margin: 50px auto 0 auto;
+    padding: 50px;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    font-size: 18px;
+    font-weight: lighter;
+    
+}
+.footer .inner .maker {
+    font-weight: lighter;
+    line-height: 30px;
+}
+.footer .inner .contact {
+    text-align: center;
+    font-weight: 600;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    
+}
+.footer .inner .contact li.inquiry {
+    display: flex;
+    justify-content: center; 
+}
+
+.footer .inner .contact li.inquiry .inquiry__title{
+    color: rgb(249, 247, 247);
+    font-weight: lighter;
+    margin-top: 80px;
+    font-size: 20px;
+}
+.footer .inner .contact li.inquiry .inquiry__inform {
+    font-size: 16px;
+    font-weight: lighter;
+    margin: 10px 15px 20px 15px;
+}
+.footer .inner .contact .working {
+    color: #777;
+    font-weight: lighter;
+    font-size: 14px;
+}
+.footer .inner .processing {
+    text-align: end;
+    line-height: 35px;
+}
+.footer .inner .processing  .processing__title {
+    font-weight: 500;
+}
+
+.contact_img {
+  display: flex;
+  position: absolute;
+  left: 50%;
+  transition: .6s;
+  transform: translate(-50%,0);
+}
+
+.contact_img a {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin:20px
+}
+
+.contact .github{
+    display: block;
+    background-image: url(../../../public/image/github.png);
+    background-size: contain;
+    text-indent: -9999px;
+  }
+  .contact .figma{
+    display: block;
+    background-image: url(../../../public/image/figma.png);
+    background-size: contain;
+    text-indent: -9999px;
+  }
+  .contact .notion{
+    display: block;
+    background-image: url(../../../public/image/notion.png);
+    background-size: contain;
+    text-indent: -9999px;
+  }
+
+.contact .contact_img a:hover{
+    transform: translate(0, -10%);
+}
+
+.contact .notion:hover{
+    background-color: rgba(0, 0, 0, 0.829);
+}
+.contact .figma:hover{
+    background-color: #E4405F;
+}
+.contact .github:hover{
+    background-color: #0077b5;
+}
