@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 
-export const useSweet = (timer, icon, title) => {
+function sweetAlert(timer, icon, title) {
   Swal.mixin({
     toast: true,
     position: "top",
@@ -15,4 +15,6 @@ export const useSweet = (timer, icon, title) => {
     icon,
     title,
   });
-};
+}
+
+export default sweetAlert;

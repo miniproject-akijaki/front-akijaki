@@ -1,31 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+// import { use } from "../../core/utils/useSweet";
+import { useInputChange } from "../../core/hooks/useInputChange";
+import { postLogin } from "../../core/api/login";
+import Visibility from "../material/VisibilityIcon";
+import { useCustomNavigate } from "../../core/hooks/useCustomNavigate";
 
-import { __userLogin } from "../../redux/thunk/thunk";
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const [inputs, setInputs] = useState({
-    userId: "",
-    password: "",
-  });
+  const [customNavigate] = useCustomNavigate();
 
-  const onChaangeInput = (event) => {
-    const { value, name } = event.target;
-    console.log(value, name);
-    setInputs({
-      ...inputs,
-      [name]: value,
-    });
-  };
-
-  const onClickBtn = (event) => {
-    const userInform = {
-      userId: userId,
-      password: password,
-    };
-    dispatch(__userLogin(userInform));
-  };
+  // const { user, isLoading, error } = useSelector((state) => state.user);
+  const { visibil } = useSelector((state) => state.visibil);
+  const [inputs, onChangeInput] = useInputChange();
   const { userId, password } = inputs;
+
+  const onClickLogin = () => {
+    const user = {
+      username: "seungyeol1",
+      password: "12345678",
+    };
+    dispatch(postLogin(user));
+  };
   return (
     <>
       <div className="form-wrapper">
@@ -38,21 +34,42 @@ const LoginForm = () => {
               name="userId"
               value={userId}
               placeholder={"아이디를 입력해주세요"}
-              onChange={onChaangeInput}
+              onChange={onChangeInput}
             />
+
             <br></br>
             <label>비밀번호 :</label>
-            <input
-              type="password"
-              name="password"
-              value={password}
-              placeholder={"비밀번호를 입력해주세요"}
-              onChange={onChaangeInput}
-            />
+            {visibil ? (
+              <input
+                type="text"
+                name="password"
+                value={password}
+                placeholder={"비밀번호를 입력해주세요"}
+                onChange={onChangeInput}
+              />
+            ) : (
+              <input
+                type="password"
+                name="password"
+                value={password}
+                placeholder={"비밀번호를 입력해주세요"}
+                onChange={onChangeInput}
+              />
+            )}
+
+            <div id="login_visibil">
+              <Visibility />
+            </div>
           </div>
           <div className="login_btn">
-            <button onClick={onClickBtn}>확인</button>
-            <button>취소</button>
+            <button onClick={onClickLogin}>확인</button>
+            <button
+              onClick={() => {
+                customNavigate("/signup");
+              }}
+            >
+              회원가입
+            </button>
           </div>
         </div>
       </div>

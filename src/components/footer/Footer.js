@@ -34,7 +34,7 @@ const Footer = () => {
                 notion
               </a>
             </li>
-            <li class="inquiry">
+            <li className="inquiry">
               <ul>
                 <li className="inquiry__title">전화문의</li>
                 <li className="inquiry__inform">070-2312-1124</li>

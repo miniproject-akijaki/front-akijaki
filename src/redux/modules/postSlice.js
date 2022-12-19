@@ -1,9 +1,36 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { baseURL, instance } from "../../core/axios/axios";
+import sweetAlert from "../../core/utils/useSweet";
+import axios from "axios";
 
-import { __postPosts, __userLogin } from "../thunk/thunk";
+export const __getPosts = createAsyncThunk(
+  "getPosts",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await axios.get("http://localhost:3001/post");
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      sweetAlert(1000, "error", error.response.data.msg);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __postPosts = createAsyncThunk(
+  "postPosts",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await axios.post("http://localhost:3001/post", payload);
+      sweetAlert(1000, "success", "코디 작성 성공");
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      sweetAlert(1000, "error", error.response.data.msg);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
 let initialState = {
-  signup: [],
   post: [],
   isLoading: false,
   error: null,
@@ -21,26 +48,20 @@ const postSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(__userLogin.pending, (state, action) => {
+    builder.addCase(__getPosts.pending, (state, action) => {
       state.isLoading = true;
     });
-    builder.addCase(__userLogin.fulfilled, (state, action) => {
+    builder.addCase(__getPosts.fulfilled, (state, action) => {
       state.post = action.payload;
       state.isLoading = false;
     });
-    builder.addCase(__userLogin.rejected, (state, action) => {
+    builder.addCase(__getPosts.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     });
     builder.addCase(__postPosts.fulfilled, (state, action) => {
       state.post.push(action.payload);
     });
-    //     builder.addCase(__postComment.fulfilled, (state, action) => {
-    //       state.post = state.post.filter((post) => {
-    //         return post.id !== action.payload.id;
-    //       });
-    //       state.post = [...state.post, action.payload];
-    //     });
     //     builder.addCase(__deleteComment.fulfilled, (state, action) => {
     //       state.post = state.post.filter((post) => {
     //         return post.id !== action.payload.id;

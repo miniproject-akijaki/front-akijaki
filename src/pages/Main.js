@@ -1,9 +1,21 @@
 import "./main.css";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
-import { useState, useLayoutEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { __getPosts } from "../redux/modules/postSlice";
+import { useCustomNavigate } from "../core/hooks/useCustomNavigate";
 
 const Main = () => {
+  const dispatch = useDispatch();
+  const [customNavigate] = useCustomNavigate();
+  const { post, isLoading, error } = useSelector((state) => state.post);
+  // console.log(post);
+
+  useEffect(() => {
+    dispatch(__getPosts());
+  }, [dispatch]);
+
   const slides = [
     "#33a",
     "#8c9",
@@ -19,7 +31,7 @@ const Main = () => {
   const btnRef = useRef();
   // const [currIndex, setCurrIndex] = useState(0);
   const [transX, setTransX] = useState(0);
-  const sldiesDomLength = useRef(slides.length);
+  const sldiesDomLength = useRef(post.length);
 
   useLayoutEffect(() => {
     const getCoordinate = () => {
@@ -93,11 +105,18 @@ const Main = () => {
             {`>`}
           </button>
           <div className="slider-list" ref={listRef}>
-            {slides.map((color, index) => {
+            {post.map((item, index) => {
+              // console.log(item.ima)
               return (
                 <div key={index} className="slider-item">
-                  <div className="slider-content" style={{ background: color }}>
-                    {index}
+                  <div
+                    className="slider-content"
+                    onClick={() => customNavigate("/detail")}
+                  >
+                    <img src={item.image} />
+                    {item.title}
+                    {item.content}
+                    {item.price}
                   </div>
                 </div>
               );
@@ -108,11 +127,18 @@ const Main = () => {
       <div className="main">
         <div className="codi_title">아기자기들</div>
         <div className="main_inner">
-          {slides.map((color, index) => {
+          {post.map((item, index) => {
             return (
-              <div key={index} className="codi_list">
-                <div className="codi_content" style={{ background: color }}>
-                  {index}
+              <div
+                key={index}
+                className="codi_list"
+                onClick={() => customNavigate("/detail")}
+              >
+                <div className="codi_content">
+                  <img src={item.image} />
+                  {item.title}
+                  {item.content}
+                  {item.price}
                 </div>
               </div>
             );

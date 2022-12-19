@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import post from "../modules/postSlice";
+import visibil from "../modules/visibilSlcie";
 
 const store = configureStore({
-  reducer: { post },
+  reducer: { post, visibil },
 });
 
 export default store;
