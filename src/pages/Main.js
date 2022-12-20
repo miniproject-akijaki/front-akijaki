@@ -5,84 +5,31 @@ import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { __getPosts } from "../redux/modules/postSlice";
 import { useCustomNavigate } from "../core/hooks/useCustomNavigate";
+import { useCarousel } from "../core/hooks/useCarousel";
 
 const Main = () => {
   const dispatch = useDispatch();
   const [customNavigate] = useCustomNavigate();
   const { post, isLoading, error } = useSelector((state) => state.post);
-  // console.log(post);
 
   useEffect(() => {
     dispatch(__getPosts());
   }, [dispatch]);
 
-  const slides = [
-    "#33a",
-    "#8c9",
-    "#f3e074",
-    "blue",
-    "black",
-    "red",
-    "yellow",
-    "green",
-    "beige",
-  ];
   const listRef = useRef();
-  const btnRef = useRef();
-  // const [currIndex, setCurrIndex] = useState(0);
-  const [transX, setTransX] = useState(0);
-  const sldiesDomLength = useRef(post.length);
+  const sldiesDomLength = useRef(0);
 
-  useLayoutEffect(() => {
-    const getCoordinate = () => {
-      const listLeft = listRef.current.getBoundingClientRect().left;
-      setTransX(listLeft);
-    };
-    getCoordinate();
-  }, []);
+  if (post.length !== 0) {
+    sldiesDomLength.current = post.length;
+  }
 
-  const handleClickNavBtn = (direction) => {
-    let currentX = listRef.current.getBoundingClientRect().x;
-    // let btnLeft = btnRef.current.getBoundingClientRect().left;
-    // let listWidth = listRef.current.getBoundingClientRect().width;
-    let listRef_NodeWidth =
-      slides.length > 0
-        ? listRef.current.childNodes[0].getBoundingClientRect().width
-        : 0;
-    //슬라이드에 넣은 데이터 배열의 길이가 0보다 크다면
-    //ref속성으로 이어진 돔요소 listRef에 childNode에 제일 첫번째?
-    //요소의 넓이값을 세팅
-    // console.log(
-    //   "노드의 넓이값",
-    //   listRef.current.childNodes[0].getBoundingClientRect().width
-    // );
+  const [handleClickNavBtn] = useCarousel(post, listRef, sldiesDomLength);
 
-    // 슬라이드 되는 박스 하나의 넓이값 * 3 (전체 넓이?를 제한하는 값?)
-    const slideDistance = listRef_NodeWidth * 3;
-    //버튼으로 눌렀을때 변화하는 현재넓이제한값?
-    let calculate_distance = 0;
-    // console.log("슬라이드 전체넓이 값?", slideDistance);
-    if (direction === "left") {
-      const limitTransX = sldiesDomLength.current * listRef_NodeWidth;
-      calculate_distance = currentX + slideDistance;
-      if (transX < calculate_distance) {
-        calculate_distance = 0;
-      }
-      console.log('left버튼 차일드노드"', listRef.current);
-    } else if (direction === "right") {
-      calculate_distance = currentX - slideDistance;
-      // console.log("현재calculate_distance", calculate_distance);
-      const limitTransX = -(
-        sldiesDomLength.current * listRef_NodeWidth +
-        slideDistance
-      );
-      // console.log(limitTransX, "limitTransX");
-      if (limitTransX >= calculate_distance) {
-        calculate_distance = 0;
-      }
-    }
-    listRef.current.style.transform = `translateX(${calculate_distance}px)`;
-  };
+  // extrareducer가 아직 처리중일때
+  if (isLoading) {
+    return;
+  }
+
   return (
     <>
       <Header />
@@ -100,23 +47,24 @@ const Main = () => {
             type="button"
             onClick={() => handleClickNavBtn("right")}
             className="carousel__btn right-btn"
-            ref={btnRef}
           >
             {`>`}
           </button>
           <div className="slider-list" ref={listRef}>
             {post.map((item, index) => {
-              // console.log(item.ima)
               return (
                 <div key={index} className="slider-item">
                   <div
                     className="slider-content"
-                    onClick={() => customNavigate("/detail")}
+                    onClick={() => customNavigate("/detail", item)}
                   >
                     <img src={item.image} />
-                    {item.title}
-                    {item.content}
-                    {item.price}
+                    <p className="slider_content_title"> {item.title}</p>
+                    <p className="slider_content_text">
+                      {item.content.length > 50
+                        ? item.content.slice(0, 50) + "..."
+                        : item.content}
+                    </p>
                   </div>
                 </div>
               );
@@ -132,13 +80,16 @@ const Main = () => {
               <div
                 key={index}
                 className="codi_list"
-                onClick={() => customNavigate("/detail")}
+                onClick={() => customNavigate("/detail", item)}
               >
                 <div className="codi_content">
                   <img src={item.image} />
-                  {item.title}
-                  {item.content}
-                  {item.price}
+                  <p className="codi_content_title"> {item.title}</p>
+                  <p className="codi_content_text">
+                    {item.content.length > 50
+                      ? item.content.slice(0, 50) + "..."
+                      : item.content}
+                  </p>
                 </div>
               </div>
             );

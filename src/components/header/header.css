@@ -4,7 +4,6 @@
     background-color: #D4E4EF;
 }
 
-
 /* common 공통 */
 button {
     width: 200px;
@@ -40,14 +39,30 @@ button:hover {
 }
 
 .logo { 
+    cursor: pointer;
     font-size: 52px;
     font-weight: 700;
 }
 
 .nav_btn {
     position: absolute;
-    right: 50px;
+    /* right: 50px; */
     top: 50%;
-    margin-top: 20px;
-    transform: translate(-50%,-50%);
+    transform: translate(0,-50%);
+}
+
+/* 글작성페이지 가기버튼 */
+.goback_btn,
+.gowrite_btn {
+    position: absolute;
+    top: 50%;
+    transform: translate(0,-50%);
+}
+
+.goback_btn {
+    right: 170px;
+}
+
+.gowrite_btn {
+    right: 0;
 }

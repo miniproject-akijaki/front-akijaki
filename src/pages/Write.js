@@ -2,17 +2,35 @@ import "./write.css";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import { useInputChange } from "../core/hooks/useInputChange";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { __postPosts } from "../redux/modules/postSlice";
+import { __modifyPosts, __postPosts } from "../redux/modules/postSlice";
 import { useCustomNavigate } from "../core/hooks/useCustomNavigate";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Write = () => {
+  const { state } = useLocation();
+  const isUpdate = useRef(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [customNavigate] = useCustomNavigate();
-  const [inputs, onChangeInput] = useInputChange();
+  const [inputs, onChangeInput, clearInput, setInputs] = useInputChange();
   const [image, setImage] = useState();
+
   const { title, content, price } = inputs;
+
+  useEffect(() => {
+    if (state !== null) {
+      setInputs({
+        ...inputs,
+        title: state.title,
+        content: state.content,
+        price: Number(state.price),
+      });
+      isUpdate.current = true;
+      setImage(state.image);
+    }
+  }, [state]);
 
   const onChnageImage = (e) => {
     const file = e.target.files[0];
@@ -28,14 +46,28 @@ const Write = () => {
   const onSubmitPost = (e) => {
     e.preventDefault();
     const newPost = {
-      id: 1,
+      id: 11,
       title: title,
       content: content,
       image: image,
       price: price,
     };
-    console.log(newPost);
-    dispatch(__postPosts(newPost));
+    if (isUpdate.current) {
+      newPost.id = state.id;
+      // console.log("작성한 게시글 정보", newPost);
+      dispatch(__modifyPosts(newPost));
+      isUpdate.current = false;
+    } else {
+      // console.log("작성한 게시글 정보", newPost);
+      dispatch(__postPosts(newPost));
+    }
+    navigate("/main");
+  };
+
+  const onClickCancle = () => {
+    if (!window.confirm("작성 중인 글이 사라질 수 있습니다. 취소하시겠습니까?"))
+      return;
+    customNavigate("/main");
   };
 
   return (
@@ -45,13 +77,13 @@ const Write = () => {
       <div className="write_outter">
         <div className="write_inner">
           <form className="write_inform" onSubmit={onSubmitPost}>
-            <img className="write_img"></img>
+            <img className="write_img" src={image}></img>
             <div className="write_input">
               <label>제목 : </label>
               <input
                 type="text"
                 name="title"
-                value={title}
+                value={title || ""}
                 onChange={onChangeInput}
                 placeholder="제목을 입력해주세요"
                 required
@@ -61,7 +93,7 @@ const Write = () => {
               <input
                 type="number"
                 name="price"
-                value={price}
+                value={price || ""}
                 onChange={onChangeInput}
                 placeholder="가격을 입력해주세요(숫자만)"
                 required
@@ -75,7 +107,7 @@ const Write = () => {
                 <br></br>
                 <textarea
                   name="content"
-                  value={content}
+                  value={content || ""}
                   onChange={onChangeInput}
                   placeholder="내용을 입력해주세요"
                   required
@@ -89,9 +121,7 @@ const Write = () => {
               <button
                 type="button"
                 className="write_cancle"
-                onClick={() => {
-                  customNavigate("/main");
-                }}
+                onClick={onClickCancle}
               >
                 취소
               </button>

@@ -3,9 +3,7 @@ import { useInputChange } from "../../core/hooks/useInputChange";
 import Visibility from "../material/VisibilityIcon";
 import CheckVisibility from "../material/CheckVisibilityIcon";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { postSignup } from "../../core/api/login";
-import { Check } from "@mui/icons-material";
 import { useCustomNavigate } from "../../core/hooks/useCustomNavigate";
 
 const SingUpForm = () => {

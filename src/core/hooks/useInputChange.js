@@ -13,12 +13,24 @@ export const useInputChange = () => {
 
   const onChangeInput = (event) => {
     const { value, name } = event.target;
-    console.log(value, name);
+
     setInputs({
       ...inputs,
       [name]: value,
     });
   };
 
-  return [inputs, onChangeInput];
+  const clearInput = () => {
+    setInputs({
+      userId: "",
+      password: "",
+      passwordCheck: "",
+      nickName: "",
+      title: "",
+      content: "",
+      prcie: "",
+    });
+  };
+
+  return [inputs, onChangeInput, clearInput, setInputs];
 };

@@ -5,7 +5,7 @@ export const instance = axios.create({
   headers: {
     "Access-Control-Allow-Origin": "*",
   },
-  withCredentials: true,
+  // withCredentials: true,
 });
 
 export const baseURL = axios.create({
@@ -13,7 +13,7 @@ export const baseURL = axios.create({
   headers: {
     "Access-Control-Allow-Origin": "*",
   },
-  withCredentials: true,
+  // withCredentials: true,
 });
 
 //인스턴스 request header

@@ -1,8 +1,11 @@
+import { useEffect } from "react";
 import "./header.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   return (
     <div className="header">
       <div className="navbar">
@@ -14,17 +17,35 @@ const Header = () => {
         >
           AKIJAKI
         </div>
-        <div className="nav_btn">
+        {location.pathname === "/write" ? (
           <button
-            className="write_btn"
+            className="gowrite_btn"
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            이전으로
+          </button>
+        ) : (
+          <button
+            className="gowrite_btn"
             onClick={() => {
               navigate("/write");
             }}
           >
             게시글 작성
           </button>
-          {/* <button className="mypage_btn">마이페이지</button> */}
-        </div>
+        )}
+        {location.pathname === "/write" ? null : (
+          <button
+            className="goback_btn"
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            이전으로
+          </button>
+        )}
       </div>
     </div>
   );

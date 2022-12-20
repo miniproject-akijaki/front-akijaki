@@ -1,12 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { baseURL, instance } from "../../core/axios/axios";
-import sweetAlert from "../../core/utils/useSweet";
+import sweetAlert from "../../core/utils/sweetAlert";
 import axios from "axios";
 
 export const __getPosts = createAsyncThunk(
   "getPosts",
   async (payload, thunkAPI) => {
     try {
+      // const data = await instance.get("/api/post");
       const data = await axios.get("http://localhost:3001/post");
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
@@ -20,8 +21,46 @@ export const __postPosts = createAsyncThunk(
   "postPosts",
   async (payload, thunkAPI) => {
     try {
+      // const data = await instance.post("/api/post", payload);
       const data = await axios.post("http://localhost:3001/post", payload);
-      sweetAlert(1000, "success", "코디 작성 성공");
+      if (data.request.status === 200) {
+        sweetAlert(1000, "success", "코디 작성 성공");
+      }
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      sweetAlert(1000, "error", error.response.data.msg);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __modifyPosts = createAsyncThunk(
+  "modifyPosts",
+  async (payload, thunkAPI) => {
+    try {
+      // const data = await instance.post("/api/post", payload);
+      const data = await axios.put(
+        `http://localhost:3001/post/${payload.id}`,
+        payload
+      );
+      if (data.request.status === 200) {
+        sweetAlert(1000, "success", "코디 수정 성공");
+      }
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      sweetAlert(1000, "error", error.response.data.msg);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __deleteyPosts = createAsyncThunk(
+  "deletePosts",
+  async (payload, thunkAPI) => {
+    try {
+      // const data = await instance.post("/api/post", payload);
+      const data = await axios.delete(`http://localhost:3001/post/${payload}`);
+      // sweetAlert(1000, "success", "코디 작성 성공");
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       sweetAlert(1000, "error", error.response.data.msg);
@@ -62,6 +101,9 @@ const postSlice = createSlice({
     builder.addCase(__postPosts.fulfilled, (state, action) => {
       state.post.push(action.payload);
     });
+    // builder.addCase(__modifyPosts.fulfilled, (state, action) => {
+    //   state.post.push(action.payload);
+    // });
     //     builder.addCase(__deleteComment.fulfilled, (state, action) => {
     //       state.post = state.post.filter((post) => {
     //         return post.id !== action.payload.id;
