@@ -5,10 +5,15 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useCustomNavigate } from "../core/hooks/useCustomNavigate";
 import { useDispatch } from "react-redux";
 import { __deleteyPosts } from "../redux/modules/postSlice";
+import FavoriteBorder from "../components/material/FavoriteBorderIcon";
+import FavoriteIcon from "../components/material/FavortieIcon";
+import { useState } from "react";
 
 const Detail = () => {
   const { state } = useLocation();
-  const { id, title, content, image, price } = state;
+  const [isCommentLike, setIsCommentLike] = useState(false);
+  const [isCodiLike, setIsCodiLike] = useState(false);
+  const { num, title, content, image, price } = state;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -19,9 +24,17 @@ const Detail = () => {
 
   const onClickDelete = () => {
     if (!window.confirm("게시글을 삭제하시겠습니까?")) return;
-    dispatch(__deleteyPosts(id));
+    dispatch(__deleteyPosts(num));
     navigate("/main");
   };
+
+  const onClickCodiLike = () => {
+    setIsCodiLike(!isCodiLike);
+  };
+  const onClickCommentLike = () => {
+    setIsCommentLike(!isCommentLike);
+  };
+
   return (
     <>
       <Header />
@@ -47,7 +60,20 @@ const Detail = () => {
           <div className="codi_btn">
             <button onClick={onClickModify}>수정</button>
             <button onClick={onClickDelete}>삭제</button>
-            <button>좋아요</button>
+            {isCodiLike ? (
+              <div className="Favorite_like_btn">
+                <button onClick={onClickCodiLike}>
+                  좋아요취소
+                  <FavoriteIcon />
+                </button>
+              </div>
+            ) : (
+              <div className="Favorite_like_btn">
+                <button onClick={onClickCodiLike}>
+                  좋아요 <FavoriteBorder />
+                </button>
+              </div>
+            )}
           </div>
         </div>
         <div className="comment">
@@ -62,7 +88,26 @@ const Detail = () => {
             Comment
             <button className="comment_btn">삭제하기</button>
             <button className="comment_btn">수정하기</button>
-            <button className="comment_btn">좋아요</button>
+            {isCommentLike ? (
+              <div className="Favorite_like_btn">
+                <button
+                  className="comment_like_btn"
+                  onClick={onClickCommentLike}
+                >
+                  좋아요취소 <br></br>
+                  <FavoriteIcon />
+                </button>
+              </div>
+            ) : (
+              <div className="Favorite_like_btn">
+                <button
+                  className="comment_like_btn"
+                  onClick={onClickCommentLike}
+                >
+                  좋아요 <FavoriteBorder />
+                </button>
+              </div>
+            )}
           </li>
         </ul>
       </div>

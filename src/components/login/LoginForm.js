@@ -11,28 +11,36 @@ import { Token } from "@mui/icons-material";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const [msg, setMsg] = useState();
   const [token, setToken] = useState();
   const [customNavigate] = useCustomNavigate();
 
   useEffect(() => {
     setToken(localStorage.getItem("id"));
+    setMsg(localStorage.getItem("msg"));
   }, []);
 
   const { visibil } = useSelector((state) => state.visibil);
   const [inputs, onChangeInput, clearInput] = useInputChange();
   const { userId, password } = inputs;
-  const onClickLogin = () => {
+
+  const onClickLogin = (e) => {
+    e.preventDefault();
     const user = {
       username: userId,
       password: password,
     };
     postLogin(user)
       .then((res) => {
+        // console.log("res결과", res);
         // console.log("res결과", res.headers.authorization);
         // console.log("res결과", axios.defaults.headers.authorization);
         localStorage.setItem("id", res.headers.authorization);
+        localStorage.setItem("msg", res.data.msg);
         const localToken = localStorage.getItem("id");
+        const localMsg = localStorage.getItem("msg");
         setToken(localToken);
+        setMsg(localMsg);
         clearInput();
       })
       .catch((error) => sweetAlert(1000, "error", error.response.data.msg));
@@ -40,9 +48,9 @@ const LoginForm = () => {
   return (
     <>
       <div className="form-wrapper">
-        <div className="login_form">
+        <form className="login_form" onSubmit={onClickLogin}>
           {token ? (
-            <UserForm token={token} setToken={setToken} />
+            <UserForm setToken={setToken} msg={msg} />
           ) : (
             <>
               <p className="login_title">로그인</p>
@@ -54,6 +62,7 @@ const LoginForm = () => {
                   value={userId}
                   placeholder={"아이디를 입력해주세요"}
                   onChange={onChangeInput}
+                  required
                 />
 
                 <br></br>
@@ -65,6 +74,7 @@ const LoginForm = () => {
                     value={password}
                     placeholder={"비밀번호를 입력해주세요"}
                     onChange={onChangeInput}
+                    required
                   />
                 ) : (
                   <input
@@ -73,6 +83,7 @@ const LoginForm = () => {
                     value={password}
                     placeholder={"비밀번호를 입력해주세요"}
                     onChange={onChangeInput}
+                    required
                   />
                 )}
 
@@ -81,7 +92,7 @@ const LoginForm = () => {
                 </div>
               </div>
               <div className="login_btn">
-                <button onClick={onClickLogin}>확인</button>
+                <button>확인</button>
                 <button
                   onClick={() => {
                     customNavigate("/signup");
@@ -92,7 +103,7 @@ const LoginForm = () => {
               </div>
             </>
           )}
-        </div>
+        </form>
       </div>
     </>
   );

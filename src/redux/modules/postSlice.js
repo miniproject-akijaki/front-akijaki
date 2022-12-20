@@ -7,8 +7,8 @@ export const __getPosts = createAsyncThunk(
   "getPosts",
   async (payload, thunkAPI) => {
     try {
-      // const data = await instance.get("/api/post");
-      const data = await axios.get("http://localhost:3001/post");
+      const data = await instance.get("/api/post");
+      // const data = await axios.get("http://localhost:3001/post");
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       sweetAlert(1000, "error", error.response.data.msg);
@@ -21,8 +21,8 @@ export const __postPosts = createAsyncThunk(
   "postPosts",
   async (payload, thunkAPI) => {
     try {
-      // const data = await instance.post("/api/post", payload);
-      const data = await axios.post("http://localhost:3001/post", payload);
+      const data = await baseURL.post("/api/post", payload);
+      // const data = await axios.post("http://localhost:3001/post", payload);
       if (data.request.status === 200) {
         sweetAlert(1000, "success", "코디 작성 성공");
       }
@@ -39,10 +39,7 @@ export const __modifyPosts = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       // const data = await instance.post("/api/post", payload);
-      const data = await axios.put(
-        `http://localhost:3001/post/${payload.id}`,
-        payload
-      );
+      const data = await baseURL.put(`/api/post/${payload.num}`, payload);
       if (data.request.status === 200) {
         sweetAlert(1000, "success", "코디 수정 성공");
       }
@@ -58,9 +55,11 @@ export const __deleteyPosts = createAsyncThunk(
   "deletePosts",
   async (payload, thunkAPI) => {
     try {
-      // const data = await instance.post("/api/post", payload);
-      const data = await axios.delete(`http://localhost:3001/post/${payload}`);
-      // sweetAlert(1000, "success", "코디 작성 성공");
+      const data = await baseURL.delete(`/api/post/${payload}`);
+      // const data = await axios.delete(`http://localhost:3001/post/${payload}`);
+      if (data.request.status === 200) {
+        sweetAlert(1000, "success", "코디 삭제 성공");
+      }
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       sweetAlert(1000, "error", error.response.data.msg);
@@ -69,8 +68,62 @@ export const __deleteyPosts = createAsyncThunk(
   }
 );
 
-let initialState = {
-  post: [],
+export const __postComment = createAsyncThunk(
+  "postComment",
+  async (payload, thunkAPI) => {
+    try {
+      //payload 글번호
+      const data = await baseURL.post(`/api/comment/${payload}`);
+      // const data = await axios.delete(`http://localhost:3001/post/${payload}`);
+      if (data.request.status === 200) {
+        sweetAlert(1000, "success", "댓글 작성 성공");
+      }
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      sweetAlert(1000, "error", error.response.data.msg);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __modifyComment = createAsyncThunk(
+  "modifyComment",
+  async (payload, thunkAPI) => {
+    try {
+      // payload 댓글번호임
+      const data = await baseURL.put(`/api/comment/${payload}`);
+      // const data = await axios.delete(`http://localhost:3001/post/${payload}`);
+      if (data.request.status === 200) {
+        sweetAlert(1000, "success", "댓글 수정 성공");
+      }
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      sweetAlert(1000, "error", error.response.data.msg);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __deleteComment = createAsyncThunk(
+  "deleteComment",
+  async (payload, thunkAPI) => {
+    try {
+      // payload 댓글번호임
+      const data = await baseURL.delete(`/api/comment/${payload}`);
+      // const data = await axios.delete(`http://localhost:3001/post/${payload}`);
+      if (data.request.status === 200) {
+        sweetAlert(1000, "success", "댓글 삭제 성공");
+      }
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      sweetAlert(1000, "error", error.response.data.msg);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+const initialState = {
+  postList: [],
   isLoading: false,
   error: null,
 };
@@ -91,7 +144,8 @@ const postSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(__getPosts.fulfilled, (state, action) => {
-      state.post = action.payload;
+      console.log(action, "get");
+      state.postList = action.payload.postList;
       state.isLoading = false;
     });
     builder.addCase(__getPosts.rejected, (state, action) => {
@@ -99,7 +153,8 @@ const postSlice = createSlice({
       state.error = action.payload;
     });
     builder.addCase(__postPosts.fulfilled, (state, action) => {
-      state.post.push(action.payload);
+      console.log(action, "post");
+      state.postList.push(action.payload);
     });
     // builder.addCase(__modifyPosts.fulfilled, (state, action) => {
     //   state.post.push(action.payload);

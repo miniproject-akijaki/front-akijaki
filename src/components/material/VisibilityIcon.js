@@ -1,6 +1,4 @@
 import SvgIcon from "@mui/material/SvgIcon";
-import { useEffect, useState } from "react";
-import { SvgIconComponent } from "@mui/icons-material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { changeVisible } from "../../redux/modules/visibilSlcie";

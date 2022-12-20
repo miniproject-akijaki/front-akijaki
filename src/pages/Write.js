@@ -34,7 +34,7 @@ const Write = () => {
 
   const onChnageImage = (e) => {
     const file = e.target.files[0];
-    console.log(file);
+    // console.log(file);
     let reader = new FileReader(); //비동기 처리
     reader.readAsDataURL(file);
     reader.onload = () => {
@@ -46,14 +46,13 @@ const Write = () => {
   const onSubmitPost = (e) => {
     e.preventDefault();
     const newPost = {
-      id: 11,
       title: title,
       content: content,
       image: image,
       price: price,
     };
     if (isUpdate.current) {
-      newPost.id = state.id;
+      newPost.num = state.num;
       // console.log("작성한 게시글 정보", newPost);
       dispatch(__modifyPosts(newPost));
       isUpdate.current = false;

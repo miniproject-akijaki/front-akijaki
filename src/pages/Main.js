@@ -10,8 +10,8 @@ import { useCarousel } from "../core/hooks/useCarousel";
 const Main = () => {
   const dispatch = useDispatch();
   const [customNavigate] = useCustomNavigate();
-  const { post, isLoading, error } = useSelector((state) => state.post);
-
+  const { postList, isLoading, error } = useSelector((state) => state.post);
+  // console.log(postList, "postList");
   useEffect(() => {
     dispatch(__getPosts());
   }, [dispatch]);
@@ -19,17 +19,15 @@ const Main = () => {
   const listRef = useRef();
   const sldiesDomLength = useRef(0);
 
-  if (post.length !== 0) {
-    sldiesDomLength.current = post.length;
+  if (postList.length !== 0) {
+    sldiesDomLength.current = postList.length;
   }
 
-  const [handleClickNavBtn] = useCarousel(post, listRef, sldiesDomLength);
+  const [handleClickNavBtn] = useCarousel(postList, listRef, sldiesDomLength);
 
-  // extrareducer가 아직 처리중일때
   if (isLoading) {
     return;
   }
-
   return (
     <>
       <Header />
@@ -51,9 +49,9 @@ const Main = () => {
             {`>`}
           </button>
           <div className="slider-list" ref={listRef}>
-            {post.map((item, index) => {
+            {postList.map((item) => {
               return (
-                <div key={index} className="slider-item">
+                <div key={item.num} className="slider-item">
                   <div
                     className="slider-content"
                     onClick={() => customNavigate("/detail", item)}
@@ -75,10 +73,10 @@ const Main = () => {
       <div className="main">
         <div className="codi_title">아기자기들</div>
         <div className="main_inner">
-          {post.map((item, index) => {
+          {postList.map((item) => {
             return (
               <div
-                key={index}
+                key={item.num}
                 className="codi_list"
                 onClick={() => customNavigate("/detail", item)}
               >

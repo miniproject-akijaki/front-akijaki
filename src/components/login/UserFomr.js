@@ -1,16 +1,15 @@
 import { useCustomNavigate } from "../../core/hooks/useCustomNavigate";
 
-const UserForm = ({ setToken }) => {
+const UserForm = ({ setToken, msg }) => {
   const [customNavigate] = useCustomNavigate();
   const onClickLogOut = () => {
     localStorage.removeItem("id");
+    localStorage.removeItem("msg");
     setToken(null);
   };
   return (
     <div className="user_form">
-      <p className="user_title">
-        어서오세요!<br></br> 준님
-      </p>
+      <p className="user_title">{msg}</p>
       <div className="user_btn">
         <button
           onClick={() => {

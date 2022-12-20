@@ -5,6 +5,7 @@ import CheckVisibility from "../material/CheckVisibilityIcon";
 import { useSelector, useDispatch } from "react-redux";
 import { postSignup } from "../../core/api/login";
 import { useCustomNavigate } from "../../core/hooks/useCustomNavigate";
+import sweetAlert from "../../core/utils/sweetAlert";
 
 const SingUpForm = () => {
   const dispatch = useDispatch();
@@ -15,22 +16,25 @@ const SingUpForm = () => {
   const [inputs, onChangeInput] = useInputChange();
   const { userId, password, passwordCheck, nickName } = inputs;
 
-  const onSignup = () => {
+  const onSignup = (e) => {
+    e.preventDefault();
+    if (password !== passwordCheck) {
+      sweetAlert(1000, "error", "패스워드를 다시 확인해주세요!");
+      return;
+    }
     const newUser = {
       nickname: nickName,
       username: userId,
       password: password,
     };
     postSignup(newUser).then((res) => {
-      console.log(res);
-      localStorage.setItem("id", res.headers.authorization);
       customNavigate("/");
     });
   };
   return (
     <div className="signup_form">
       <p className="login_title">회원가입</p>
-      <div className="login_input">
+      <form className="login_input" onSubmit={onSignup}>
         <label id="login_id">아이디 : </label>
         <input
           type="text"
@@ -38,6 +42,7 @@ const SingUpForm = () => {
           name="userId"
           placeholder={"아이디를 입력해주세요"}
           onChange={onChangeInput}
+          required
         />
         <br></br>
         <label>비밀번호 :</label>
@@ -48,6 +53,7 @@ const SingUpForm = () => {
             name="password"
             placeholder={"비밀번호를 입력해주세요"}
             onChange={onChangeInput}
+            required
           />
         ) : (
           <input
@@ -56,6 +62,7 @@ const SingUpForm = () => {
             name="password"
             placeholder={"비밀번호를 입력해주세요"}
             onChange={onChangeInput}
+            required
           />
         )}
 
@@ -73,6 +80,7 @@ const SingUpForm = () => {
             value={passwordCheck}
             placeholder={"비밀번호를 한번 더 입력해주세요"}
             onChange={onChangeInput}
+            required
           />
         ) : (
           <input
@@ -82,6 +90,7 @@ const SingUpForm = () => {
             value={passwordCheck}
             placeholder={"비밀번호를 한번 더 입력해주세요"}
             onChange={onChangeInput}
+            required
           />
         )}
 
@@ -97,18 +106,19 @@ const SingUpForm = () => {
           value={nickName}
           placeholder={"닉네임을 입력해주세요"}
           onChange={onChangeInput}
+          required
         />
-      </div>
-      <div className="login_btn">
-        <button onClick={onSignup}>확인</button>
-        <button
-          onClick={() => {
-            customNavigate("/");
-          }}
-        >
-          취소
-        </button>
-      </div>
+        <div className="login_btn">
+          <button type="submit">확인</button>
+          <button
+            onClick={() => {
+              customNavigate("/");
+            }}
+          >
+            취소
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

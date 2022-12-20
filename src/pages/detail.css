@@ -140,6 +140,23 @@ textarea:hover {
     font-weight: 500;
 }
 
+/* 좋아요 버튼 */
+.Favorite_like_btn {
+    float: right;
+    font-size: 100px;
+}
+.Favorite_like_btn button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 댓글 좋아요 버튼  */
+
+.Favorite_like_btn > .comment_like_btn {
+    width: 110px;
+}
+
 .comment_list button:hover {
     background-color: white;
     color: rgb(245, 176, 49);;
