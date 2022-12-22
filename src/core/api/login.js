@@ -32,3 +32,13 @@ export const postLogout = async (post) => {
     sweetAlert(1000, "error", "로그아웃 실패");
   }
 };
+
+export const postSignout = async (post) => {
+  try {
+    const data = await instance.put("/api/withdrawal", post);
+    sweetAlert(1000, "success", "회원탈퇴 성공");
+    return data;
+  } catch (error) {
+    sweetAlert(1000, "error", "로그아웃 실패");
+  }
+};

@@ -9,6 +9,8 @@ export const useInputChange = () => {
     title: "",
     content: "",
     prcie: "",
+    commentContent: "",
+    updateCommentContent: "",
   });
 
   const onChangeInput = (event) => {
@@ -29,6 +31,8 @@ export const useInputChange = () => {
       title: "",
       content: "",
       prcie: "",
+      commentContent: "",
+      updateCommentContent: "",
     });
   };
 

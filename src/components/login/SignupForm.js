@@ -27,9 +27,13 @@ const SingUpForm = () => {
       username: userId,
       password: password,
     };
-    postSignup(newUser).then((res) => {
-      customNavigate("/");
-    });
+    postSignup(newUser)
+      .then((res) => {
+        customNavigate("/");
+      })
+      .catch((error) => {
+        sweetAlert(1000, "error", error);
+      });
   };
   return (
     <div className="signup_form">

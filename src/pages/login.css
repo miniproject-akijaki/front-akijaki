@@ -192,4 +192,10 @@ input:focus {
 }
 .user_form  > .user_btn {
   margin-top: 80px;
+  font-size: 24px;
 }
+.user_form  > .user_btn > button{
+  margin-right: 20px;
+  border-radius: 10px;
+}
+

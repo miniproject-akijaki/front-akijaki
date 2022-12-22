@@ -61,9 +61,15 @@
     margin: 40px 0 30px 80px;
     border: 2px solid darkgray;
     border-radius: 10px;
+    transition: all .2s ease-in-out;
+}
+/* hover시 grow효과 */
+.slider-item:hover {
+    transform: scale(1.03);
 }
 
 .slider-content {
+    box-sizing: content-box;
     cursor: pointer;
     text-align: center;
     width: 450px;
@@ -79,13 +85,21 @@
 .slider_content_title {
     width: 300px;
     font-size: 32px;
-    margin: 10px auto;
+    margin: auto;
 }
 
 .slider_content_text {
     width: 300px;
     margin: auto;
     height: 50px;
+}
+
+/* 슬라이드 좋아요부분 */
+.slider_content_like {
+    display: flex;
+    align-items: center;
+    float: right;
+    font-size: 20px;
 }
 
 
@@ -109,13 +123,13 @@
 }
 .main_inner {
     width: 1200px;
-    height: 800px;
+    /* height: 800px; */
     margin: auto;
     border: 2px solid gray;
     border-radius: 10px;
     display: flex;
     flex-wrap: wrap;
-    overflow: hidden;
+    padding-bottom: 30px;
 }
 
 .main_inner > .codi_list > .codi_content {
@@ -124,8 +138,14 @@
     border-radius: 10px;
     margin: 30px 30px 0 30px;
     width: 330px;
-    height: 300px;
+    height: 350px;
+    box-sizing: content-box;
+    transition: all .2s ease-in-out;
 }
+.main_inner > .codi_list > .codi_content:hover {
+    transform: scale(1.03)
+}
+
 
 .main_inner > .codi_list > .codi_content img{
     width: 330px;

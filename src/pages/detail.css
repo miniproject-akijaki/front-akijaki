@@ -8,6 +8,11 @@ textarea {
     border: none;
 }
 
+button {
+    border-radius: 10px;
+    font-size: 22px;
+}
+
 textarea:hover {
     outline: none;
     border-color: #c2d1f3;
@@ -34,7 +39,7 @@ textarea:hover {
 .codi_outter {
     margin: 80px auto 100px auto;
     width: 1100px;
-    height: 700px;
+    height: 750px;
     border: 3px solid #95b2f2;
     border-radius: 10px;
     box-shadow: -1px 0 5px 1px rgb(0 0 0 / 20%);
@@ -54,12 +59,27 @@ textarea:hover {
     display: flex;  
 }
 
-.codi_outter  > .codi_inform > .codi_img {
+/* 이미지, 좋아요, 작성일 */
+.codi_outter  > .codi_inform > .codi_subform > .codi_img {
     margin: 30px 0 20px 20px;
     width: 420px;
     height: 500px;
     background-color: blanchedalmond;
 }
+
+.codi_outter  > .codi_inform > .codi_subform > .codi_subform_subdata{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 좋아요 카운트 */
+.codi_outter  > .codi_inform > .codi_subform > .codi_subform_subdata > .codi_likecount{
+    margin-right: 30px;
+    display: flex;
+    align-items: center;
+}
+
 
 .codi_outter  > .codi_inform > .codi_input {
     width: 600px;
@@ -90,14 +110,15 @@ textarea:hover {
 .codi_btn {
     display: flex;
     justify-content: space-evenly;
+    font-size: 22px;
 }
 
 /* comment */
-
 .comment_box{
     width: 900px;
     height: 220px;
     margin: auto;
+    
 }
 
 /* 댓글내용 textArea */
@@ -113,11 +134,15 @@ textarea:hover {
 /* 작성된 댓글 */
 .comment_list {
     width: 900px;
+    position: relative;
     margin: 30px auto ;
+    padding: 0;
 }
 
 .comment_li {
+    position: relative;
     text-align: left;
+    margin-top: 30px;
     padding: 10px 0 0 30px;
     list-style: none;
     width: inherit;
@@ -127,7 +152,37 @@ textarea:hover {
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 5px;
-    height: 100px;
+    height: 150px;
+}
+
+/* comment 유저 닉네임, 댓글, 작성일 */
+.comment_list > .comment_li > .comment_user_text ,
+.comment_list > .comment_li > .comment_user_inform {
+    display: flex;
+}
+
+/* 댓글  input*/
+.comment_list > .comment_li > .comment_user_text {
+    width: 500px;
+    margin-top: 10px;
+    font-size: 16px;
+    border: none;
+} 
+.comment_li > input {
+    border: 2px solid gray !important;
+    border-radius: 10px;
+} 
+
+/* 유저 닉네임 */
+.comment_list > .comment_li > .comment_user_inform {
+    width: 250px;
+    font-size: 20px;
+}
+
+.comment_list > .comment_li > .comment_user_date {
+    position: absolute;
+    bottom: 0;
+    width: 150px;
 }
 
 .comment_list button {
@@ -135,16 +190,37 @@ textarea:hover {
     background-color: white;
     width: 100px;
     font-size: 16px;
-    float: right;
-    padding-bottom: 30px;
+    /* padding-bottom: 100px; */
     font-weight: 500;
 }
 
-/* 좋아요 버튼 */
+/*게시글 좋아요 버튼 */
 .Favorite_like_btn {
     float: right;
     font-size: 100px;
 }
+.coid_btn_like {
+    font-size: 22px;
+}
+/* 댓글 게시글 좋아요 버튼 */
+/* 삭제하기 수정하기 버튼 */
+.comment_btn,
+.comment_favorite_like_btn {
+    top: 0;
+    position: absolute;
+}
+.comment_btn.delete {
+    right: 0;
+}
+.comment_btn.modify {
+    right: 100px;
+}
+.comment_favorite_like_btn {
+    right: 200px;
+}   
+
+
+.comment_like_btn,
 .Favorite_like_btn button{
     display: flex;
     justify-content: center;
@@ -152,8 +228,7 @@ textarea:hover {
 }
 
 /* 댓글 좋아요 버튼  */
-
-.Favorite_like_btn > .comment_like_btn {
+.comment_favorite_like_btn > .comment_like_btn {
     width: 110px;
 }
 

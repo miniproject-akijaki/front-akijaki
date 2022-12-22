@@ -52,10 +52,13 @@
 }
 
 .write_outter > .write_inner > .write_inform > .write_img {
+    background-image: url(../../public/image/noImage.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left center;
     margin: 30px 0 20px 20px;
     width: 420px;
     height: 500px;
-    background-color: blanchedalmond;
 }
 
 .write_outter > .write_inner .write_content {
@@ -70,7 +73,12 @@
 /* 등록, 취소 버튼 */
 .write_btn {
     position: absolute;
-    bottom: 0;
+    bottom: 15px;
     left: 50%;
     transform: translate(-50%,0);
 } 
+
+.write_cancle {
+    margin-left: 40px;
+}
+

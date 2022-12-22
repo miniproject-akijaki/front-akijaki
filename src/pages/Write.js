@@ -16,6 +16,7 @@ const Write = () => {
   const [customNavigate] = useCustomNavigate();
   const [inputs, onChangeInput, clearInput, setInputs] = useInputChange();
   const [image, setImage] = useState();
+  const [showImage, setShowImage] = useState(state && state.imgUrl);
 
   const { title, content, price } = inputs;
 
@@ -34,12 +35,12 @@ const Write = () => {
 
   const onChnageImage = (e) => {
     const file = e.target.files[0];
-    // console.log(file);
+    setImage(file);
+    // console.log(file, "file");
     let reader = new FileReader(); //비동기 처리
     reader.readAsDataURL(file);
     reader.onload = () => {
-      //백엔드서버랑 어떻게 통신을할지 애기해보기
-      setImage(reader.result);
+      setShowImage(reader.result);
     };
   };
 
@@ -57,7 +58,6 @@ const Write = () => {
       dispatch(__modifyPosts(newPost));
       isUpdate.current = false;
     } else {
-      // console.log("작성한 게시글 정보", newPost);
       dispatch(__postPosts(newPost));
     }
     navigate("/main");
@@ -66,7 +66,7 @@ const Write = () => {
   const onClickCancle = () => {
     if (!window.confirm("작성 중인 글이 사라질 수 있습니다. 취소하시겠습니까?"))
       return;
-    customNavigate("/main");
+    customNavigate(-1);
   };
 
   return (
@@ -76,7 +76,7 @@ const Write = () => {
       <div className="write_outter">
         <div className="write_inner">
           <form className="write_inform" onSubmit={onSubmitPost}>
-            <img className="write_img" src={image}></img>
+            <img className="write_img" src={showImage}></img>
             <div className="write_input">
               <label>제목 : </label>
               <input
@@ -99,7 +99,12 @@ const Write = () => {
               />
               <br></br>
               <label className="write_file">이미지 파일:</label>
-              <input type="file" name="image" onChange={onChnageImage} />
+              <input
+                type="file"
+                name="image"
+                onChange={onChnageImage}
+                required
+              />
               <br></br>
               <div className="write_content">
                 <label>내용</label>
